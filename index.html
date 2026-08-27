@@ -273,6 +273,109 @@
     .grafico-box.alto { height: 300px; }
     .grafico-box.medio { height: 260px; }
   }
+
+  /* ===== BUSCA ===== */
+  .busca-wrap { position: relative; flex: 1 1 260px; min-width: 220px; max-width: 420px; }
+  .busca {
+    width: 100%; background: var(--bg3); border: 1px solid var(--borda); color: var(--texto);
+    border-radius: 9px; padding: 0.5rem 2rem 0.5rem 2rem; font-size: 0.85rem;
+    font-family: inherit; outline: none; transition: border-color .15s;
+  }
+  .busca:focus { border-color: var(--azul-claro); }
+  .busca::placeholder { color: #47536b; }
+  .busca-icone {
+    position: absolute; left: 0.6rem; top: 50%; transform: translateY(-50%);
+    color: var(--texto-muted); font-size: 0.85rem; pointer-events: none;
+  }
+  .busca-limpar {
+    position: absolute; right: 0.45rem; top: 50%; transform: translateY(-50%);
+    background: transparent; border: none; color: var(--texto-muted);
+    font-size: 1rem; cursor: pointer; padding: 0 .2rem; line-height: 1; font-family: inherit;
+  }
+  .busca-limpar:hover { color: var(--vermelho); }
+
+  /* ===== LINHAS CLICÁVEIS ===== */
+  tbody tr.clicavel { cursor: pointer; transition: background .12s; }
+  tbody tr.clicavel:hover { background: rgba(59,130,246,0.10); }
+  tbody tr.clicavel:hover td:first-child { box-shadow: inset 3px 0 0 var(--azul-claro); }
+  .dica-clique {
+    font-size: 0.72rem; color: var(--texto-muted); margin-left: auto;
+    display: inline-flex; align-items: center; gap: .3rem; white-space: nowrap;
+  }
+
+  /* ===== MODAL DE DETALHE ===== */
+  .modal-fundo {
+    position: fixed; inset: 0; z-index: 900;
+    background: rgba(5,8,15,0.72); backdrop-filter: blur(2px);
+    display: flex; align-items: center; justify-content: center; padding: 1.25rem;
+    opacity: 0; transition: opacity .16s;
+  }
+  .modal-fundo.aberto { opacity: 1; }
+  .modal {
+    width: 100%; max-width: 660px; max-height: 88vh; overflow-y: auto;
+    background: var(--bg2); border: 1px solid var(--borda); border-radius: 14px;
+    box-shadow: 0 24px 70px rgba(0,0,0,0.6);
+    transform: translateY(8px); transition: transform .16s;
+  }
+  .modal-fundo.aberto .modal { transform: translateY(0); }
+  .modal::-webkit-scrollbar { width: 9px; }
+  .modal::-webkit-scrollbar-thumb { background: var(--bg4); border-radius: 5px; }
+  .modal-topo {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1.15rem 1.35rem 0.9rem; border-bottom: 1px solid var(--borda);
+    position: sticky; top: 0; background: var(--bg2); z-index: 2;
+    border-radius: 14px 14px 0 0;
+  }
+  .modal-titulo { font-size: 1.02rem; font-weight: 800; line-height: 1.3; letter-spacing: -0.01em; }
+  .modal-sub { font-size: 0.78rem; color: var(--texto-muted); margin-top: 0.2rem; line-height: 1.45; }
+  .modal-fechar {
+    margin-left: auto; flex-shrink: 0; background: transparent;
+    border: 1px solid rgba(255,255,255,0.15); border-radius: 8px;
+    color: var(--texto-muted); font-size: 1.05rem; line-height: 1;
+    padding: 0.32rem 0.55rem; cursor: pointer; font-family: inherit; transition: all .15s;
+  }
+  .modal-fechar:hover { color: var(--vermelho); border-color: var(--vermelho); }
+  .modal-corpo { padding: 1.1rem 1.35rem 1.35rem; }
+  .modal-bloco { margin-bottom: 1.15rem; }
+  .modal-bloco:last-child { margin-bottom: 0; }
+  .modal-bloco-titulo {
+    font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--texto-muted); font-weight: 700; margin-bottom: 0.5rem;
+    padding-bottom: 0.3rem; border-bottom: 1px solid var(--borda);
+  }
+  .modal-campos { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.7rem 1.1rem; }
+  .modal-campo { min-width: 0; }
+  .modal-campo.largo { grid-column: 1 / -1; }
+  .modal-rotulo {
+    font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.07em;
+    color: var(--texto-muted); font-weight: 700; margin-bottom: 0.15rem;
+  }
+  .modal-valor { font-size: 0.9rem; font-weight: 600; word-break: break-word; line-height: 1.45; }
+  .modal-valor.grande { font-size: 1.15rem; font-weight: 800; letter-spacing: -0.02em; }
+  .modal-valor.muted { color: var(--texto-muted); font-weight: 500; }
+  .modal-valor.texto { font-weight: 500; white-space: pre-wrap; font-size: 0.85rem; }
+  .modal-nota {
+    margin-top: 0.9rem; padding: 0.7rem 0.85rem; border-radius: 9px;
+    background: var(--bg3); border-left: 3px solid var(--azul-claro);
+    font-size: 0.8rem; color: var(--texto-muted); line-height: 1.55;
+  }
+  .modal-nota.alerta { border-left-color: var(--amarelo); background: rgba(245,158,11,0.07); }
+  .modal-nota.critico { border-left-color: var(--vermelho); background: rgba(239,68,68,0.07); }
+  .modal-nota b { color: var(--texto); }
+  .modal-acoes { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.1rem; }
+  .modal-acao {
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    padding: 0.45rem 0.8rem; border-radius: 8px; text-decoration: none;
+    background: var(--bg3); border: 1px solid var(--borda);
+    color: var(--texto); font-size: 0.8rem; font-weight: 600;
+    font-family: inherit; cursor: pointer; transition: all .15s;
+  }
+  .modal-acao:hover { border-color: var(--azul-claro); color: #fff; }
+
+  @media (max-width: 720px) {
+    .modal { max-height: 92vh; }
+    .modal-campos { grid-template-columns: 1fr; }
+  }
   .filtro-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--texto-muted); font-weight: 700; }
 </style>
 </head>
@@ -335,6 +438,27 @@
     <div class="secao-sub" id="subResumo">—</div>
     <div class="filtros" id="filtrosPeriodo"></div>
     <div class="kpis" id="kpis"></div>
+  </section>
+
+  <section class="secao">
+    <div class="secao-titulo">Buscar Lead</div>
+    <div class="secao-sub">Digite parte do nome ou do telefone. A busca cobre os atendimentos e as análises técnicas — clique em qualquer resultado para ver o histórico completo.</div>
+    <div class="card">
+      <div class="filtros">
+        <span id="buscaCampo"></span>
+        <button type="button" class="chip ativo" data-b="todos">Tudo</button>
+        <button type="button" class="chip" data-b="atend">Atendimentos</button>
+        <button type="button" class="chip" data-b="analise">Análises</button>
+        <span class="dica-clique">&#128065; clique em um resultado para abrir a ficha</span>
+      </div>
+      <div class="tabela-wrap">
+        <table id="tabelaBusca">
+          <thead><tr><th>Lead</th><th>Origem</th><th>Produto / Recorte</th><th>Responsável</th><th>Data</th><th>Situação</th></tr></thead>
+          <tbody id="corpoBusca"></tbody>
+        </table>
+      </div>
+      <div class="secao-sub" id="notaBusca" style="margin:.6rem 0 0 0"></div>
+    </div>
   </section>
 
   <section class="secao">
@@ -651,6 +775,133 @@ function topN(mapa, n, rotuloOutros) {
 }
 
 /* =========================================================================
+   DETALHE EM JANELA (MODAL)
+   Uso: abrirDetalhe({ titulo, sub, blocos:[{titulo, campos:[{r,v,largo,classe}]}],
+                       notas:[{tipo,html}], acoes:[{rotulo,href}] })
+   Linhas de tabela viram clicáveis com `tabelaClicavel(tbodyId, lista, montador)`.
+   ========================================================================= */
+(function () {
+  const fundo = document.createElement('div');
+  fundo.className = 'modal-fundo oculto';
+  fundo.id = 'modalFundo';
+  fundo.innerHTML =
+    '<div class="modal" role="dialog" aria-modal="true">' +
+      '<div class="modal-topo">' +
+        '<div><div class="modal-titulo" id="modalTitulo"></div>' +
+        '<div class="modal-sub" id="modalSub"></div></div>' +
+        '<button class="modal-fechar" id="modalFechar" title="Fechar (Esc)">&#10005;</button>' +
+      '</div>' +
+      '<div class="modal-corpo" id="modalCorpo"></div>' +
+    '</div>';
+  document.body.appendChild(fundo);
+
+  fundo.addEventListener('click', ev => { if (ev.target === fundo) fecharDetalhe(); });
+  document.getElementById('modalFechar').addEventListener('click', fecharDetalhe);
+  document.addEventListener('keydown', ev => {
+    if (ev.key === 'Escape' && !fundo.classList.contains('oculto')) fecharDetalhe();
+  });
+})();
+
+function fecharDetalhe() {
+  const f = document.getElementById('modalFundo');
+  f.classList.remove('aberto');
+  setTimeout(() => f.classList.add('oculto'), 160);
+}
+
+function abrirDetalhe(cfg) {
+  const f = document.getElementById('modalFundo');
+  document.getElementById('modalTitulo').innerHTML = cfg.titulo || '';
+  document.getElementById('modalSub').innerHTML = cfg.sub || '';
+
+  let html = '';
+  (cfg.blocos || []).forEach(bl => {
+    const campos = (bl.campos || []).filter(c => c && c.v !== undefined && c.v !== null && c.v !== '');
+    if (!campos.length) return;
+    html += '<div class="modal-bloco">' +
+      (bl.titulo ? '<div class="modal-bloco-titulo">' + bl.titulo + '</div>' : '') +
+      '<div class="modal-campos">' +
+      campos.map(c =>
+        '<div class="modal-campo' + (c.largo ? ' largo' : '') + '">' +
+        '<div class="modal-rotulo">' + c.r + '</div>' +
+        '<div class="modal-valor ' + (c.classe || '') + '">' + c.v + '</div></div>'
+      ).join('') + '</div></div>';
+  });
+  (cfg.notas || []).forEach(n => {
+    if (!n || !n.html) return;
+    html += '<div class="modal-nota ' + (n.tipo || '') + '">' + n.html + '</div>';
+  });
+  if (cfg.acoes && cfg.acoes.length) {
+    html += '<div class="modal-acoes">' + cfg.acoes.filter(Boolean).map(a =>
+      '<a class="modal-acao" href="' + a.href + '" target="_blank" rel="noopener">' + a.rotulo + '</a>'
+    ).join('') + '</div>';
+  }
+  document.getElementById('modalCorpo').innerHTML = html ||
+    '<div style="color:var(--texto-muted);font-size:.85rem">Sem dados detalhados para este registro.</div>';
+
+  f.classList.remove('oculto');
+  requestAnimationFrame(() => f.classList.add('aberto'));
+}
+
+/** Marca as linhas de um tbody como clicáveis e liga cada uma ao seu registro. */
+function tabelaClicavel(tbodyId, lista, montador) {
+  const tb = document.getElementById(tbodyId);
+  if (!tb) return;
+  Array.from(tb.querySelectorAll('tr')).forEach((tr, i) => {
+    if (i >= lista.length || !lista[i]) return;
+    tr.classList.add('clicavel');
+    tr.title = 'Clique para ver os detalhes';
+    tr.addEventListener('click', () => abrirDetalhe(montador(lista[i])));
+  });
+}
+
+/** Rótulo padrão avisando que a tabela é clicável. */
+function dicaClique(texto) {
+  return '<span class="dica-clique">&#128065; ' + (texto || 'clique em uma linha para ver os detalhes') + '</span>';
+}
+
+/* =========================================================================
+   BUSCA
+   ========================================================================= */
+/** Normaliza para busca: sem acento, minúsculo, só dígitos preservados. */
+function chaveBusca(s) {
+  return String(s === null || s === undefined ? '' : s)
+    .normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
+}
+/** Termo casa se todas as palavras aparecerem no texto; dígitos comparam só dígitos. */
+function casaBusca(termo, ...campos) {
+  const t = chaveBusca(termo);
+  if (!t) return true;
+  const texto = campos.map(c => chaveBusca(c)).join(' ');
+  const soDig = texto.replace(/\D/g, '');
+  return t.split(/\s+/).every(p => {
+    if (/^\d{3,}$/.test(p)) return soDig.includes(p) || texto.includes(p);
+    return texto.includes(p);
+  });
+}
+/** Monta o HTML de um campo de busca. */
+function campoBusca(id, placeholder) {
+  return '<div class="busca-wrap">' +
+    '<span class="busca-icone">&#128269;</span>' +
+    '<input type="search" class="busca" id="' + id + '" placeholder="' + placeholder + '" autocomplete="off" />' +
+    '<button type="button" class="busca-limpar oculto" id="' + id + 'Limpar" title="Limpar">&#10005;</button></div>';
+}
+/** Liga o campo de busca a um callback, com debounce curto. */
+function ligarBusca(id, aoDigitar) {
+  const el = document.getElementById(id);
+  const limpar = document.getElementById(id + 'Limpar');
+  if (!el) return;
+  let t = null;
+  const disparar = () => {
+    limpar.classList.toggle('oculto', !el.value);
+    clearTimeout(t);
+    t = setTimeout(() => aoDigitar(el.value), 120);
+  };
+  el.addEventListener('input', disparar);
+  limpar.addEventListener('click', () => { el.value = ''; el.focus(); disparar(); });
+}
+
+
+/* =========================================================================
    APLICAÇÃO
    ========================================================================= */
 /* A aba de atendimentos tem um espaço no fim do nome na planilha
@@ -703,7 +954,11 @@ function montarBase(dados) {
       espera: entrega && envio ? diasEntre(envio, entrega) : null,
       valor: parseNumBR(campo(l, c, 'Honorários Iniciais', 'K')),
       beneficio: parseNumBR(campo(l, c, 'Diferença Mensal', 'J')),
-      restituicao: parseNumBR(campo(l, c, 'Restituição', 'L'))
+      restituicao: parseNumBR(campo(l, c, 'Restituição', 'L')),
+      vidas: campo(l, c, 'VIDAS', 'C'),
+      mensalAtual: parseNumBR(campo(l, c, 'Mensalidade Atual', 'H')),
+      mensalRevisada: parseNumBR(campo(l, c, 'Mensalidade Revisada', 'I')),
+      anotacoes: campo(l, c, 'Anotações', 'X')
     });
   });
 
@@ -723,7 +978,8 @@ function montarBase(dados) {
       situacao: situacao(campo(l, c, 'Situação', 'E')),
       agendou: sim(campo(l, c, 'Atendimento agendado?', 'J')),
       espera: entrega && envio ? diasEntre(envio, entrega) : null,
-      valor: 0, beneficio: 0, restituicao: 0
+      valor: 0, beneficio: 0, restituicao: 0,
+      excesso: campo(l, c, 'Excesso Mensal', 'F')
     });
   });
 
@@ -750,7 +1006,18 @@ function montarBase(dados) {
       perdido: nt.includes('perdido'),
       motivo: campo(l, c, 'Motivo de Não Fechamento', 'AD'),
       temperatura: campo(l, c, 'Temperatura do Lead', 'T'),
-      honorarios: parseNumBR(campo(l, c, 'Honorários Iniciais', 'R'))
+      honorarios: parseNumBR(campo(l, c, 'Honorários Iniciais', 'R')),
+      telefone: campo(l, c, 'Telefone', 'B'),
+      excesso: campo(l, c, 'Excesso Mensal', 'J'),
+      tipoLead: campo(l, c, 'Tipo de Lead', 'P'),
+      resumo: campo(l, c, 'Resumo do Atendimento', 'Q'),
+      honCompleto: campo(l, c, 'Honorários (Completo)', 'S'),
+      travando: campo(l, c, 'O que está travando o fechamento? [Resumo]', 'X'),
+      proximoPasso: campo(l, c, 'Próximo Passo Detalhado', 'Y'),
+      historico: campo(l, c, 'Histórico Detalhado da Negociação [Espaço Livre]', 'Z'),
+      canal: campo(l, c, 'Canal de Contato Preferido do Lead', 'AA'),
+      especificacao: campo(l, c, 'Especificação do Motivo da Não Contratação', 'AE'),
+      statusNeg: neg
     };
   }).filter(a => a.lead || a.dataAt);
 
@@ -815,6 +1082,212 @@ function agregar(f) {
   a.receitaInicial = hon.reduce((s, x) => s + x, 0);
   a.beneficioCliente = an.filter(x => x.situacao === 'Viável').reduce((s, x) => s + (x.beneficio || 0), 0);
   return a;
+}
+
+/* =========================================================================
+   FICHAS (janela de detalhe)
+   ========================================================================= */
+const dt = x => x ? x.toLocaleDateString('pt-BR') : '—';
+
+/** Análises técnicas do mesmo lead, para cruzar com o atendimento. */
+function analisesDoLead(nome) {
+  if (!nome) return [];
+  const alvo = chaveBusca(nome);
+  return BASE.analises.filter(a => a.lead && chaveBusca(a.lead) === alvo);
+}
+function atendimentosDoLead(nome) {
+  if (!nome) return [];
+  const alvo = chaveBusca(nome);
+  return BASE.atend.filter(a => a.lead && chaveBusca(a.lead) === alvo);
+}
+
+function fichaAtendimento(x) {
+  const rel = analisesDoLead(x.lead);
+  const tel = soDigitosCRM(x.telefone);
+  return {
+    titulo: esc(x.lead || 'Lead sem nome'),
+    sub: esc(x.produto) + (x.dataAt ? ' · atendimento em ' + dt(x.dataAt) : '') +
+         (x.closer ? ' · closer ' + esc(x.closer) : ''),
+    blocos: [
+      { titulo: 'Atendimento', campos: [
+        { r: 'Status', v: '<span class="tag-pct ' + (x.realizado ? 'verde' : x.noShow ? 'vermelho' : 'amarelo') + '">' + esc(x.status || '—') + '</span>' },
+        { r: 'Desfecho', v: x.ganho ? '<span class="tag-pct verde">Cliente ganho</span>'
+            : x.perdido ? '<span class="tag-pct vermelho">Lead perdido</span>'
+            : '<span class="tag-pct neutro">Sem desfecho registrado</span>' },
+        { r: 'Data do agendamento', v: dt(x.dataAgend) },
+        { r: 'Data do atendimento', v: dt(x.dataAt) },
+        { r: 'SDR', v: esc(x.sdr || '—') },
+        { r: 'Closer', v: esc(x.closer || '—') },
+        { r: 'Telefone', v: esc(x.telefone || '—') },
+        { r: 'Tipo de lead', v: esc(x.tipoLead || '—') },
+        { r: 'Temperatura', v: x.temperatura
+            ? '<span class="tag-pct ' + (/quente/i.test(x.temperatura) ? 'verde' : /morno/i.test(x.temperatura) ? 'amarelo' : 'neutro') + '">' + esc(x.temperatura) + '</span>'
+            : '<span class="tag-pct neutro">não classificada</span>' },
+        { r: 'Excesso mensal', v: esc(x.excesso || '—') }
+      ]},
+      { titulo: 'Proposta', campos: [
+        { r: 'Honorários iniciais', v: x.honorarios > 0 ? moeda(x.honorarios) : '—', classe: x.honorarios > 0 ? 'grande' : '' },
+        { r: 'Condição completa', v: esc(x.honCompleto || '—'), largo: true },
+        x.resumo ? { r: 'Resumo do atendimento', v: esc(x.resumo), largo: true, classe: 'texto' } : null
+      ]},
+      (x.motivo || x.travando || x.especificacao) ? { titulo: 'Por que não fechou', campos: [
+        x.motivo ? { r: 'Motivo', v: '<span class="tag-pct vermelho">' + esc(x.motivo) + '</span>' } : null,
+        x.especificacao ? { r: 'Especificação', v: esc(x.especificacao), largo: true, classe: 'texto' } : null,
+        x.travando ? { r: 'O que está travando', v: esc(x.travando), largo: true, classe: 'texto' } : null
+      ].filter(Boolean) } : null,
+      (x.proximoPasso || x.historico || x.canal) ? { titulo: 'Negociação', campos: [
+        x.canal ? { r: 'Canal preferido', v: esc(x.canal) } : null,
+        x.proximoPasso ? { r: 'Próximo passo', v: esc(x.proximoPasso), largo: true, classe: 'texto' } : null,
+        x.historico ? { r: 'Histórico', v: esc(x.historico), largo: true, classe: 'texto' } : null
+      ].filter(Boolean) } : null,
+      rel.length ? { titulo: 'Análises técnicas deste lead', campos: rel.map(a => ({
+        r: a.frente + ' · ' + (a.mes ? labelMes(a.mes) : 'sem mês'),
+        v: '<span class="tag-pct ' + (a.situacao === 'Viável' ? 'verde' : a.situacao === 'Inviável' ? 'vermelho' : 'amarelo') + '">' + a.situacao + '</span> ' +
+           esc(a.recorte) + (a.espera !== null ? ' · entregue em ' + a.espera + ' d' : ''),
+        largo: true
+      })) } : null
+    ].filter(Boolean),
+    notas: [
+      !x.ganho && !x.perdido && x.realizado ? { tipo: 'alerta', html:
+        'Atendimento <b>realizado mas sem desfecho registrado</b>. Enquanto ficar assim, este lead não entra no win rate e some do radar de follow-up.' } : null,
+      x.noShow ? { tipo: 'alerta', html: 'O lead <b>não compareceu</b>. Uma hora de agenda do closer consumida sem chance de receita — confirmação na véspera costuma reduzir isso pela metade.' } : null,
+      x.ganho && x.honorarios > 0 ? { tipo: '', html: 'Contrato fechado com <b>' + moeda(x.honorarios) + '</b> de honorários iniciais. O êxito, que é a maior parte da receita, não está neste número.' } : null,
+      rel.length && rel.some(a => a.situacao === 'Viável') && x.perdido ? { tipo: 'critico', html:
+        'Este lead teve análise <b>viável</b> e mesmo assim foi perdido — é o caso mais caro do funil, porque o custo técnico já tinha sido pago.' } : null
+    ].filter(Boolean),
+    acoes: tel ? [{ rotulo: '&#128172; Abrir no WhatsApp', href: 'https://wa.me/55' + tel }] : []
+  };
+}
+
+function soDigitosCRM(s) {
+  const d = String(s || '').replace(/\D/g, '');
+  return d.replace(/^55/, '');
+}
+
+function fichaAnalise(a) {
+  const rel = atendimentosDoLead(a.lead);
+  const economia = a.mensalAtual > 0 && a.mensalRevisada > 0 ? a.mensalAtual - a.mensalRevisada : null;
+  return {
+    titulo: esc(a.lead || 'Lead sem nome'),
+    sub: a.frente + (a.mes ? ' · ' + labelMes(a.mes) : '') + ' · ' + esc(a.recorte),
+    blocos: [
+      { titulo: 'Análise', campos: [
+        { r: 'Situação', v: '<span class="tag-pct ' + (a.situacao === 'Viável' ? 'verde' : a.situacao === 'Inviável' ? 'vermelho' : 'amarelo') + '">' + a.situacao + '</span>', classe: 'grande' },
+        { r: a.frente.includes('Parecer') ? 'Instituição' : 'Plano de saúde', v: esc(a.recorte) },
+        { r: a.frente.includes('Parecer') ? 'Tipo de contrato' : 'Modalidade', v: esc(a.modalidade) },
+        { r: 'SDR', v: esc(a.sdr) },
+        a.vidas ? { r: 'Vidas no plano', v: esc(a.vidas) } : null,
+        a.excesso ? { r: 'Excesso mensal', v: esc(a.excesso) } : null
+      ].filter(Boolean) },
+      { titulo: 'Prazos', campos: [
+        { r: 'Enviada em', v: dt(a.envio) },
+        { r: 'Entregue em', v: dt(a.entrega) },
+        { r: 'Tempo de entrega', v: a.espera === null ? '—'
+            : '<span class="tag-pct ' + (a.espera <= 1 ? 'verde' : a.espera <= 5 ? 'amarelo' : 'vermelho') + '">' + a.espera + ' dia(s)</span>' },
+        { r: 'Atendimento agendado', v: a.agendou
+            ? '<span class="tag-pct verde">Sim</span>' : '<span class="tag-pct vermelho">Não</span>' }
+      ]},
+      (a.mensalAtual > 0 || a.restituicao > 0) ? { titulo: 'Números do caso', campos: [
+        a.mensalAtual > 0 ? { r: 'Mensalidade atual', v: moeda(a.mensalAtual) } : null,
+        a.mensalRevisada > 0 ? { r: 'Mensalidade revisada', v: moeda(a.mensalRevisada) } : null,
+        economia !== null ? { r: 'Economia mensal', v: '<span class="val-pos">' + moeda(economia) + '</span>' } : null,
+        a.restituicao > 0 ? { r: 'Restituição estimada', v: moeda(a.restituicao), classe: 'grande' } : null,
+        a.valor > 0 ? { r: 'Honorários iniciais', v: moeda(a.valor) } : null
+      ].filter(Boolean) } : null,
+      rel.length ? { titulo: 'Atendimentos deste lead', campos: rel.map(x => ({
+        r: (x.dataAt ? dt(x.dataAt) : 'sem data') + ' · ' + esc(x.closer || 'sem closer'),
+        v: '<span class="tag-pct ' + (x.ganho ? 'verde' : x.perdido ? 'vermelho' : 'neutro') + '">' +
+           (x.ganho ? 'Cliente ganho' : x.perdido ? 'Lead perdido' : esc(x.status || 'sem desfecho')) + '</span>' +
+           (x.honorarios > 0 ? ' · ' + moeda(x.honorarios) : ''),
+        largo: true
+      })) } : null,
+      a.anotacoes ? { titulo: 'Anotações', campos: [{ r: 'Registro', v: esc(a.anotacoes), largo: true, classe: 'texto' }] } : null
+    ].filter(Boolean),
+    notas: [
+      a.situacao === 'Viável' && !a.agendou ? { tipo: 'critico', html:
+        'Análise <b>viável e sem atendimento agendado</b>. O trabalho técnico já foi pago pelo escritório e não chegou à mesa de negociação — é o vazamento mais caro do funil.' } : null,
+      a.espera !== null && a.espera > 5 ? { tipo: 'alerta', html:
+        'Entrega levou <b>' + a.espera + ' dias</b>. Acima de 5 dias o lead esfria e a taxa de agendamento cai.' } : null,
+      a.situacao === 'Pendente' ? { tipo: 'alerta', html: 'Análise ainda <b>pendente</b> de conclusão — enquanto isso o lead está parado.' } : null
+    ].filter(Boolean),
+    acoes: []
+  };
+}
+
+/* =========================================================================
+   BUSCA DE LEAD
+   ========================================================================= */
+const BUSCA = { termo: '', escopo: 'todos' };
+
+function resultadosBusca() {
+  const out = [];
+  if (BUSCA.escopo !== 'analise') {
+    BASE.atend.forEach(x => {
+      if (casaBusca(BUSCA.termo, x.lead, x.telefone, x.produto, x.closer))
+        out.push({ tipo: 'atend', reg: x, data: x.dataAt });
+    });
+  }
+  if (BUSCA.escopo !== 'atend') {
+    BASE.analises.forEach(a => {
+      if (casaBusca(BUSCA.termo, a.lead, a.recorte, a.sdr))
+        out.push({ tipo: 'analise', reg: a, data: a.entrega || a.envio });
+    });
+  }
+  return out.sort((x, y) => (y.data ? y.data.getTime() : 0) - (x.data ? x.data.getTime() : 0));
+}
+
+function renderBusca() {
+  const todos = resultadosBusca();
+  const vis = todos.slice(0, 120);
+  const corpo = document.getElementById('corpoBusca');
+
+  if (!BUSCA.termo) {
+    corpo.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--texto-muted);padding:1.4rem">' +
+      'Digite o nome ou o telefone de um lead para ver o histórico completo.</td></tr>';
+    document.getElementById('notaBusca').textContent =
+      num(BASE.atend.length) + ' atendimentos e ' + num(BASE.analises.length) + ' análises disponíveis para consulta.';
+    return;
+  }
+
+  corpo.innerHTML = vis.length ? vis.map(o => {
+    const x = o.reg;
+    if (o.tipo === 'atend') {
+      return '<tr><td><b>' + esc(x.lead || '—') + '</b>' +
+        (x.telefone ? '<br><span style="color:var(--texto-muted);font-size:.75rem">' + esc(x.telefone) + '</span>' : '') + '</td>' +
+        '<td><span class="tag-pct neutro">Atendimento</span></td>' +
+        '<td>' + esc(x.produto) + '</td><td>' + esc(x.closer || '—') + '</td>' +
+        '<td>' + dt(x.dataAt) + '</td>' +
+        '<td>' + (x.ganho ? '<span class="tag-pct verde">Cliente ganho</span>'
+          : x.perdido ? '<span class="tag-pct vermelho">Lead perdido</span>'
+          : '<span class="tag-pct amarelo">' + esc(x.status || 'sem desfecho') + '</span>') + '</td></tr>';
+    }
+    return '<tr><td><b>' + esc(x.lead || '—') + '</b></td>' +
+      '<td><span class="tag-pct neutro">' + (x.frente.includes('Parecer') ? 'Parecer' : 'Diagnóstico') + '</span></td>' +
+      '<td>' + esc(x.recorte) + '</td><td>' + esc(x.sdr || '—') + '</td>' +
+      '<td>' + dt(x.entrega || x.envio) + '</td>' +
+      '<td><span class="tag-pct ' + (x.situacao === 'Viável' ? 'verde' : x.situacao === 'Inviável' ? 'vermelho' : 'amarelo') + '">' +
+      x.situacao + (x.situacao === 'Viável' && !x.agendou ? ' · sem agenda' : '') + '</span></td></tr>';
+  }).join('') : '<tr><td colspan="6" style="text-align:center;color:var(--texto-muted);padding:1.4rem">Nenhum lead encontrado.</td></tr>';
+
+  if (vis.length) {
+    tabelaClicavel('corpoBusca', vis, o => o.tipo === 'atend' ? fichaAtendimento(o.reg) : fichaAnalise(o.reg));
+  }
+  document.getElementById('notaBusca').textContent =
+    'Encontrados ' + num(todos.length) + ' registro(s)' + (todos.length > vis.length ? ' — exibindo os 120 mais recentes.' : '.');
+}
+
+let buscaMontada = false;
+function montarBusca() {
+  if (buscaMontada) return;
+  buscaMontada = true;
+  document.getElementById('buscaCampo').innerHTML = campoBusca('inputBusca', 'Nome ou telefone do lead…');
+  ligarBusca('inputBusca', v => { BUSCA.termo = v; renderBusca(); });
+  document.querySelectorAll('.chip[data-b]').forEach(btn =>
+    btn.addEventListener('click', () => {
+      BUSCA.escopo = btn.dataset.b;
+      document.querySelectorAll('.chip[data-b]').forEach(x => x.classList.toggle('ativo', x === btn));
+      renderBusca();
+    }));
 }
 
 function renderFiltro(b) {
@@ -1348,6 +1821,8 @@ function desenhar() {
 
 function render(dados) {
   BASE = montarBase(dados);
+  montarBusca();
+  renderBusca();
   desenhar();
 }
 
